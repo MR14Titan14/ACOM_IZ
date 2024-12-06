@@ -1,5 +1,5 @@
 import cv2
-import time
+import time as t
 import numpy as np
 
 def track(video_path, tracker_type):
@@ -18,6 +18,7 @@ def track(video_path, tracker_type):
     bbox = cv2.selectROI("Select", frame, False)
     cv2.destroyWindow("Select")
 
+    start_time = t.time()
     if(tracker_type=="KCF"):
         tracker = cv2.TrackerKCF_create()
     if(tracker_type=="CSRT"):
@@ -43,6 +44,9 @@ def track(video_path, tracker_type):
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
+    end_time = t.time()
+    time = end_time - start_time
+    print(f"Время выполнения: {time} секунд")
     cap.release()
     cv2.destroyAllWindows()
 def custom_track(video_path):
@@ -62,6 +66,7 @@ def custom_track(video_path):
     bbox = cv2.selectROI('Select', frame, False)
     cv2.destroyWindow("Select")
 
+    start_time = t.time()
     x, y, w, h = bbox
 
     roi = frame[y:y + h, x:x + w]
@@ -93,12 +98,11 @@ def custom_track(video_path):
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+    end_time = t.time()
+    time = end_time - start_time
+    print(f"Время выполнения: {time} секунд")
     cap.release()
     cv2.destroyAllWindows()
 
-start_time = time.time()
 # track("vid/video5.mp4","KCF")
-custom_track("vid/video1.mp4")
-end_time = time.time()
-time = end_time - start_time
-print(f"Время выполнения: {time} секунд")
+custom_track("vid/video2.mp4")
