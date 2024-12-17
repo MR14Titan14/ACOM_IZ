@@ -41,15 +41,17 @@ def predict_roboflow(image_path,detect_confidence,rec_confidence):
 
     for name in names:
         os.remove(f".temp/{name}")
-    print(number)
+    # print(number)
 
     for i in range(len(text_pos)):
         cv2.putText(img,number[i],text_pos[i],cv2.FONT_HERSHEY_SIMPLEX,0.2,(0,255,0),1)
 
     resized=cv2.resize(img,(320,240),interpolation=cv2.INTER_AREA)
 
-    cv2.imshow("win",resized)
+    # cv2.imshow("win",resized)
     cv2.imwrite(".temp/res.jpg",resized)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-predict_roboflow("orig.jpg", 0.40, 0.75)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
+    return number, resized
+num,img=predict_roboflow("orig.jpg", 0.40, 0.75)
+print(num)
