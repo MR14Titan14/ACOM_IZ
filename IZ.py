@@ -55,6 +55,6 @@ def predict_roboflow(image_path,detect_confidence,rec_confidence):
     cv2.imwrite(".temp/res.jpg",resized)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
-    return number, resized
+    return number.rstrip(), resized
 num,img=predict_roboflow("orig.jpg", 0.40, 0.75)
 print(num)
